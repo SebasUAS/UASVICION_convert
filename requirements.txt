@@ -1,4 +1,3 @@
-Plaintext
 bcchapi
 pandas
 numpy
