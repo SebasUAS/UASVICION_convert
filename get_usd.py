@@ -21,7 +21,7 @@ def obtener_usd_clp(): # O obtener_uf_clp()
         # 3. Consultamos la base de datos estructurada
         df = siete.cuadro(
             series=["F073.TCO.PRE.Z.D"], 
-            nombres=["USD"], 
+            nombres=["USD_CLP"], 
             desde=fecha_inicio, 
             hasta=fecha_fin
         )
