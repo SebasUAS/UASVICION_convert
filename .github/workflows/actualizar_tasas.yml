@@ -1,0 +1,40 @@
+name: Actualizar Tasas UASVISION
+
+on:
+  schedule:
+    # Se ejecuta de lunes a viernes a las 11:00 UTC (07:00 AM u 08:00 AM hora de Chile)
+    - cron: '0 11 * * 1-5'
+  workflow_dispatch: # Permite que presiones un botón para ejecutarlo manualmente
+
+permissions:
+  contents: write
+
+jobs:
+  actualizar-datos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+
+      - name: Ejecutar Orquestador
+        env: # Aquí inyectamos tu token seguro
+          BCCH_TOKEN: ${{ secrets.BCCH_TOKEN }}
+        run: python generador_json.py
+
+      - name: Guardar y subir el archivo JSON generado
+        run: |
+          git config --global user.name 'GitHub Action Bot'
+          git config --global user.email 'action@github.com'
+          git add valores_uasvision.json
+          # Solo hace commit si hubo cambios en los valores
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Actualización automática de tasas" && git push)
