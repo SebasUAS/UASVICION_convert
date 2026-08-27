@@ -1,5 +1,6 @@
 import bcchapi
 import pandas as pd
+import os
 from datetime import datetime, timedelta
 
 def obtener_uf_clp(): # O obtener_uf_clp()
