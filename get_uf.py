@@ -18,7 +18,7 @@ def obtener_uf_clp(): # O obtener_uf_clp()
         # 3. Consultamos la base de datos estructurada
         df = siete.cuadro(
             series=["F073.UFF.PRE.Z.D"], 
-            nombres=["UF_CLP"], 
+            nombres=["UF"], 
             desde=fecha_inicio, 
             hasta=fecha_fin
         )
